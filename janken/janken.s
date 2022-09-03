@@ -14,14 +14,14 @@ main:
 
 	call getChar#rax will be destroyed
 	xor r14, r14
-	mov r14b, al
-	sub r14b, 0x30
+	mov r14,rax
+	sub r14, 0x30
 checkHand:
-	cmp r14b, 2
+	cmp r14, 2
 	jle checkHand_1
 	jmp exception
 checkHand_1:
-	cmp r14b, 0
+	cmp r14, 0
 	jge checkHand_end
 	jmp exception
 checkHand_end:
@@ -93,7 +93,7 @@ printHand_case_0:
 	pop r14
 	jmp printHand_end
 printHand_case_1:
-	cmp r14, 1
+	cmp r15, 1
 	jnz printHand_case_2
 	lea r14, _CHOKI
 	push r14
@@ -101,7 +101,7 @@ printHand_case_1:
 	pop r14
 	jmp printHand_end
 printHand_case_2:
-	cmp r14, 2
+	cmp r15, 2
 	jnz printHand_end
 	lea r14, _PA
 	push r14
@@ -140,7 +140,8 @@ getChar:
 	mov rsi, r11
 	mov rdx, 2 
 	syscall
-	mov rax, _input
+	xor rax,rax
+	movb al, _input
 	pop r11
 	pop rcx
 	ret
