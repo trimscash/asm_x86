@@ -18,6 +18,7 @@ main:
 loop:
 	push rcx#index hyouji
 	call print_num##
+	pop rcx
 fizz:#3|rcx=>fizz
 	mov rdx, 0#joui byte wararerukazu
 	mov rax, rcx#kai byte wararerukazu
@@ -52,14 +53,17 @@ buzzend:
 	lea r11,_newline
 	push r11
 	call print
-
-	cmp rcx, 0xffffffffffffffff
+	pop r11
+	pop r11
+	cmp rcx, 0x10
 	jnz loop
 loopend:
-exit:
-	mov rax, 60#exit 
-	mov rdi, 0x1
-	syscall 
+	mov rax, 0
+	ret
+#exit:
+#	mov rax, 60#exit 
+#	mov rdi, 0x1
+#	syscall 
 
 #push num/call print_num
 #sei no sei suu wo hyoujun shutu ryoku
